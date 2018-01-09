@@ -19,6 +19,21 @@ class Pile {
 			"Clubs"    : [],
 			"Spades"   : []
 		};
+		this.ranks = {
+			"2"     : 2,			// Map integer values to card ranks
+			"3"     : 3,
+			"4"     : 4,
+			"5"     : 5,
+			"6"     : 6,
+			"7"     : 7,
+			"8"     : 8,
+			"9"     : 9,
+			"10"    : 10,
+			"Jack"  : 11,
+			"Queen" : 12,
+			"King"  : 13,
+			"Ace"   : 14
+		};
 	}
 	/**
 	 *	This method adds a card to the card list of the Pile.
@@ -81,5 +96,30 @@ class Pile {
     		this.cards[i] = this.cards[randomIndex];
     		this.cards[randomIndex] = temp;
   		}
+	 }
+
+	 compareCards(a, b) {
+		var ranks = {
+			"2"     : 2,			// Map integer values to card ranks
+			"3"     : 3,
+			"4"     : 4,
+			"5"     : 5,
+			"6"     : 6,
+			"7"     : 7,
+			"8"     : 8,
+			"9"     : 9,
+			"10"    : 10,
+			"Jack"  : 11,
+			"Queen" : 12,
+			"King"  : 13,
+			"Ace"   : 14
+		};
+	 	if(ranks[a.rank] > ranks[b.rank]) {
+	 		return 1;
+	 	}
+	 	if(ranks[a.rank] < ranks[b.rank]) {
+	 		return -1;
+	 	}
+	 	return 0;
 	 }
 }

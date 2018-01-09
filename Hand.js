@@ -19,15 +19,15 @@ class Hand extends Pile{
 	score() {
 		// The card list used for scoring
 		var cards = [];
-		// TODO:
 		// This if/else code block checks for rank starting from highest (Royal Flush) to lowest
 		// (High Card).
 		if(this.isRoyalFlush() != null) {
-			return this.isRoyalFlush();
+			cards = this.isRoyalFlush();
+			return {"string": "Royal Flush.", "cards": cards};
 		}
-		// TODO:
 		else if(this.isStraightFlush() != null) {
-			return this.isStraightFlush();
+			cards = this.isStraightFlush();
+			return {"string": "Straight Flush.", "cards": cards};
 		}
 		else if(this.isFourOfKind() != null) {
 			cards = this.isFourOfKind()
@@ -41,9 +41,9 @@ class Hand extends Pile{
 			cards = this.isFlush();
 			return {"string": "Flush of " + cards[0].suit, "cards": cards};
 		}
-		// TODO:
 		else if(this.isStraight() != null) {
-			return this.isStraight();
+			cards = this.isStraight();
+			return {"string": "Straight.", "cards": cards};
 		}
 		else if(this.isThreeOfKind() != null) {
 			cards = this.isThreeOfKind();
@@ -69,6 +69,12 @@ class Hand extends Pile{
 	 * @return {list} Returns a list of scoring cards. 
 	 */
 	isRoyalFlush() {
+		if(this.isStraight() != null && this.isFlush() != null) {
+			var straight = this.isStraight();
+			if(straight[0].rank == "10") {
+				return straight;
+			}
+		}
 		return null;
 	}
     /**
@@ -78,6 +84,9 @@ class Hand extends Pile{
 	 * @return {list} Returns a list of scoring cards. 
 	 */
 	isStraightFlush() {
+		if(this.isStraight() != null && this.isFlush() != null) {
+			return this.isStraight();
+		}
 		return null;
 	}
 	/**
@@ -117,7 +126,15 @@ class Hand extends Pile{
 	 * @return {list} Returns a list of scoring cards. 
 	 */
 	isStraight() {
-		return null;
+		var copy = this.cards.slice();
+		copy = copy.sort(this.compareCards);
+		
+		for(var i = 0; i < copy.length - 1; i++) {
+			if(this.ranks[copy[i+1].rank] - this.ranks[copy[i].rank] != 1) {
+				return null;
+			}
+		}
+		return copy;
 	}
 	/**
 	 * This method checks whether the hand has a score of Two Pair's.
@@ -130,7 +147,7 @@ class Hand extends Pile{
 	/**
 	 * This method checks whether the hand has a score of Three of a Kind.
 	 * It uses splitCheck() to gather more information about the hand. 
-	 * @retrun {list} Returns a list of scoring cards. 
+	 * @return {list} Returns a list of scoring cards. 
 	 */
 	isThreeOfKind() {
 		return this.matchCards(3);
@@ -138,7 +155,7 @@ class Hand extends Pile{
 	/**
 	 * This method checks whether the hand has a score of One Pair.
 	 * It uses splitCheck() to gather more information about the hand. 
-	 * @retrun {list} Returns a list of scoring cards. 
+	 * @return {list} Returns a list of scoring cards. 
 	 */	
 	isPair() {
 		return this.matchCards(2);
@@ -147,12 +164,12 @@ class Hand extends Pile{
 	 * This method splits the hand to look for multiple sets of matching
      * cards.
 	 * @param {number} - Takes in the size of split.
-	 * @retrun {list} Returns a list of scoring cards. 
+	 * @return {list} Returns a list of scoring cards. 
 	 */
 	splitCheck(size) {
 		var copy = this.cards.slice();
 		var pairs;
-		
+
 		if(this.matchCards(size) == null){
 			return null;
 		}
@@ -174,7 +191,7 @@ class Hand extends Pile{
 	 * This method looks for n matching cards.  
 	 * @param {number} - The number of matching cards.
 	 * @param {list} - The card list (optional).
-	 * @retrun {list} Returns a list of scoring cards. 
+	 * @return {list} Returns a list of scoring cards. 
 	 */
 	matchCards(number, cards) {
 		var count = new Array(14);
