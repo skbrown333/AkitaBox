@@ -42,3 +42,4 @@ URL: steffan.me
 The code and other files for this project are located at the GITHUB link. In
 order to run this project you will need to download all of the files and open the
 PokerHand.html file within a web browser. Alternatively, the project is running on
+the URL provided (steffan.me) for convenience.
