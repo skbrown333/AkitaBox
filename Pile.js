@@ -97,7 +97,13 @@ class Pile {
     		this.cards[randomIndex] = temp;
   		}
 	 }
-
+	 /**
+	  * This method is used to compare card ranks, specifically for the
+	  * list.sort() method.
+	  * @param {object} - First card for comparison.
+	  * @param {object} - Second card for comparison.
+	  * @return {number} Returns 1 for a > b, -1 for a < b, and 0 for a == b.
+	  */
 	 compareCards(a, b) {
 		var ranks = {
 			"2"     : 2,			// Map integer values to card ranks
