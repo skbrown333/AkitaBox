@@ -36,7 +36,7 @@ Classes:
 SET UP:
 -------
 
-GITHUB: https://github.com/skbrown333/AkitaBox
+GITHUB: https://github.com/skbrown333/Poker-Hand-Evaluation 
 URL: steffan.me
 
 The code and other files for this project are located at the GITHUB link. In
